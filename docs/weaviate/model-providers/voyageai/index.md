@@ -1,5 +1,5 @@
 ---
-title: Voyage AI + Weaviate
+title: Voyage AI by MongoDB + Weaviate
 sidebar_position: 10
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai']
@@ -7,7 +7,11 @@ image: og/docs/integrations/provider_integrations_voyageai.jpg
 
 <!-- Note: for images, use https://docs.google.com/presentation/d/15opIcJuaIjEEcs_1Zm8B6pccox2p7_MHSjCnRv4dPfU/edit?usp=sharing -->
 
-Voyage AI offers a wide range of models for natural language processing. Weaviate seamlessly integrates with Voyage AI's APIs, allowing users to leverage Voyage AI's models directly from the Weaviate Database.
+Voyage AI by MongoDB offers a wide range of models for natural language processing. Weaviate seamlessly integrates with Voyage AI's APIs, allowing users to leverage Voyage AI's models directly from the Weaviate Database.
+
+:::info Voyage AI is now part of MongoDB
+Voyage AI was acquired by MongoDB and is now referred to as **Voyage AI by MongoDB**. The APIs, model names, and integrations described here are unchanged.
+:::
 
 These integrations empower developers to build sophisticated AI-driven applications with ease.
 
@@ -42,7 +46,7 @@ In turn, they simplify the process of building AI-driven applications to speed u
 
 ## Get started
 
-You must provide a valid Voyage AI API key to Weaviate for these integrations. Go to [Voyage AI](https://www.voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for these integrations. Go to [Voyage AI by MongoDB](https://www.voyageai.com/) to sign up and obtain an API key.
 
 Then, go to the relevant integration page to learn how to configure Weaviate with the Voyage AI models and start using them in your applications.
 

@@ -17,11 +17,15 @@ import PyCode from '!!raw-loader!../_includes/provider.vectorizer.py';
 import TSCode from '!!raw-loader!../_includes/provider.vectorizer.ts';
 import GoCode from '!!raw-loader!/_includes/code/howto/go/docs/model-providers/2-usage-text/main.go';
 
-# Voyage AI Embeddings with Weaviate
+# Voyage AI by MongoDB Embeddings with Weaviate
 
 Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
 
-[Configure a Weaviate vector index](#configure-the-vectorizer) to use an Voyage AI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your Voyage AI API key. This feature is called the *vectorizer*.
+:::info Voyage AI is now part of MongoDB
+Voyage AI was acquired by MongoDB and is now referred to as **Voyage AI by MongoDB**. The APIs, model names, and integrations described here are unchanged.
+:::
+
+[Configure a Weaviate vector index](#configure-the-vectorizer) to use a Voyage AI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your Voyage AI API key. This feature is called the *vectorizer*.
 
 At [import time](#data-import), Weaviate generates text object embeddings and saves them into the index. For [vector](#vector-near-text-search) and [hybrid](#hybrid-search) search operations, Weaviate converts text queries into embeddings.
 
@@ -50,7 +54,7 @@ This integration is enabled by default on Weaviate Cloud (WCD) instances.
 
 ### API credentials
 
-You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI](https://www.voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI by MongoDB](https://www.voyageai.com/) to sign up and obtain an API key.
 
 Provide the API key to Weaviate using one of the following methods:
 
@@ -341,25 +345,41 @@ The query below returns the `n` best scoring objects from the database, set by `
 
 ### Available models
 
+The following list reflects the models currently available from [Voyage AI by MongoDB](https://docs.voyageai.com/docs/embeddings). The default model is used if no model is specified.
+
+Current (recommended) general-purpose and domain models:
+
+- voyage-4-large
 - voyage-4
 - voyage-4-lite
-- voyage-4-large
+- voyage-4-nano
+- voyage-code-4
+- voyage-finance-2
+- voyage-law-2
+
+Contextual embedding models (see the note below):
+
+- voyage-context-4
+- voyage-context-3
+
+Legacy models (still accessible, but superseded by the models above):
+
+- voyage-3-large
 - voyage-3.5
 - voyage-3.5-lite
-- voyage-context-3 (contextual embeddings)
-- voyage-3-large
 - voyage-3 (default)
 - voyage-3-lite
+- voyage-code-3
+- voyage-multilingual-2
+- voyage-large-2-instruct
 - voyage-large-2 (default for &lt;= `v1.24.24`, `v1.25.17`, `v1.26.4`)
 - voyage-code-2
 - voyage-2
-- voyage-law-2
-- voyage-large-2-instruct
-- voyage-finance-2
-- voyage-multilingual-2
 
 :::note Contextual embeddings
-The `voyage-context-3` model uses Voyage AI's [contextual embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure this model, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. This model is optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
+The `voyage-context-4` and `voyage-context-3` models use Voyage AI's [contextualized chunk embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure one of these models, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. These models are optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
+
+The API's `contextualized_embed` method accepts an `inputs` parameter of type `Union[List[List[str]], List[str]]` — that is, both input formats are supported: a list of documents where each document is a list of chunk strings (`List[List[str]]`), or a flat list of chunk strings (`List[str]`).
 :::
 
 <details>
@@ -367,6 +387,7 @@ The `voyage-context-3` model uses Voyage AI's [contextual embeddings API](https:
     Model support history
   </summary>
 
+- Added `voyage-4-nano`, `voyage-code-4`, `voyage-code-3`, `voyage-context-4`
 - `v1.36`:
     - Added `voyage-4`, `voyage-4-lite`, `voyage-4-large`
 - Added `voyage-3.5`, `voyage-3.5-lite`, `voyage-context-3`

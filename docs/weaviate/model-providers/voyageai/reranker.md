@@ -1,6 +1,6 @@
 ---
 title: Reranker
-description: VoyageAI Reranker Model Provider
+description: Voyage AI by MongoDB Reranker Model Provider
 sidebar_position: 70
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai', 'reranking']
@@ -15,9 +15,13 @@ import TSConnect from '!!raw-loader!../_includes/provider.connect.ts';
 import PyCode from '!!raw-loader!../_includes/provider.reranker.py';
 import TSCode from '!!raw-loader!../_includes/provider.reranker.ts';
 
-# Voyage AI reranker models with Weaviate
+# Voyage AI by MongoDB reranker models with Weaviate
 
 Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
+
+:::info Voyage AI is now part of MongoDB
+Voyage AI was acquired by MongoDB and is now referred to as **Voyage AI by MongoDB**. The APIs, model names, and integrations described here are unchanged.
+:::
 
 [Configure a Weaviate collection](#configure-the-reranker) to use a Voyage AI reranker model, and Weaviate will use the specified model and your Voyage AI API key to rerank search results.
 
@@ -48,7 +52,7 @@ This integration is enabled by default on Weaviate Cloud (WCD) instances.
 
 ### API credentials
 
-You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI](https://www.voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI by MongoDB](https://www.voyageai.com/) to sign up and obtain an API key.
 
 Provide the API key to Weaviate using one of the following methods:
 

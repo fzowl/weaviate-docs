@@ -1,6 +1,6 @@
 ---
 title: Multimodal Embeddings
-description: "Weaviate's integration with VoyageAI's APIs allows you to access their models' capabilities directly from Weaviate."
+description: "Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate."
 sidebar_position: 25
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai', 'embeddings']
@@ -14,11 +14,15 @@ import TSConnect from '!!raw-loader!../_includes/provider.connect.ts';
 import PyCode from '!!raw-loader!../_includes/provider.vectorizer.py';
 import TSCode from '!!raw-loader!../_includes/provider.vectorizer.ts';
 
-# VoyageAI Multimodal Embeddings with Weaviate
+# Voyage AI by MongoDB Multimodal Embeddings with Weaviate
 
-Weaviate's integration with VoyageAI's APIs allows you to access their models' capabilities directly from Weaviate.
+Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
 
-[Configure a Weaviate vector index](#configure-the-vectorizer) to use a VoyageAI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your VoyageAI API key. This feature is called the *vectorizer*.
+:::info Voyage AI is now part of MongoDB
+Voyage AI was acquired by MongoDB and is now referred to as **Voyage AI by MongoDB**. The APIs, model names, and integrations described here are unchanged.
+:::
+
+[Configure a Weaviate vector index](#configure-the-vectorizer) to use a Voyage AI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your Voyage AI API key. This feature is called the *vectorizer*.
 
 Note this integration does not support Voyage AI's "interleaving" input mode. For this type of usage, import your own vectors with objects as [shown in this guide](../../starter-guides/custom-vectors.mdx).
 
@@ -30,7 +34,7 @@ At [import time](#data-import), Weaviate generates multimodal object embeddings 
 
 ### Weaviate configuration
 
-Your Weaviate instance must be configured with the VoyageAI vectorizer integration (`multi2vec-voyageai`) module.
+Your Weaviate instance must be configured with the Voyage AI vectorizer integration (`multi2vec-voyageai`) module.
 
 <details>
   <summary>For Weaviate Cloud (WCD) users</summary>
@@ -49,7 +53,7 @@ This integration is enabled by default on Weaviate Cloud (WCD) instances.
 
 ### API credentials
 
-You must provide a valid VoyageAI API key to Weaviate for this integration. Go to [VoyageAI](https://voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI by MongoDB](https://voyageai.com/) to sign up and obtain an API key.
 
 Provide the API key to Weaviate using one of the following methods:
 
@@ -80,7 +84,7 @@ Provide the API key to Weaviate using one of the following methods:
 
 ## Configure the vectorizer
 
-[Configure a Weaviate index](../../manage-collections/vector-config.mdx#specify-a-vectorizer) as follows to use a VoyageAI embedding model:
+[Configure a Weaviate index](../../manage-collections/vector-config.mdx#specify-a-vectorizer) as follows to use a Voyage AI embedding model:
 
 <Tabs className="code" groupId="languages">
   <TabItem value="py" label="Python">
@@ -141,7 +145,7 @@ import VectorizationBehavior from '/_includes/vectorization.behavior.mdx';
 
 ### Vectorizer parameters
 
-The following examples show how to configure VoyageAI-specific options.
+The following examples show how to configure Voyage AI-specific options.
 
 <Tabs className="code" groupId="languages">
   <TabItem value="py" label="Python">
@@ -164,7 +168,7 @@ The following examples show how to configure VoyageAI-specific options.
 
 </Tabs>
 
-For further details on model parameters, see the [VoyageAI API documentation](https://docs.voyageai.com/docs/multimodal-embeddings).
+For further details on model parameters, see the [Voyage AI API documentation](https://docs.voyageai.com/docs/multimodal-embeddings).
 
 
 ## Header parameters
@@ -210,7 +214,7 @@ If you already have a compatible model vector available, you can provide it dire
 
 ## Searches
 
-Once the vectorizer is configured, Weaviate will perform vector and hybrid search operations using the specified VoyageAI model.
+Once the vectorizer is configured, Weaviate will perform vector and hybrid search operations using the specified Voyage AI model.
 
 ![Embedding integration at search illustration](../_includes/integration_voyageai_embedding_search.png)
 
@@ -319,8 +323,8 @@ The `voyage-multimodal-3.5` model supports video embeddings in addition to text 
 
 ### Other integrations
 
-- [VoyageAI text embedding models + Weaviate](./embeddings.md).
-- [VoyageAI reranker models + Weaviate](./reranker.md).
+- [Voyage AI text embedding models + Weaviate](./embeddings.md).
+- [Voyage AI reranker models + Weaviate](./reranker.md).
 
 ### Code examples
 
@@ -331,7 +335,7 @@ Once the integrations are configured at the collection, the data management and 
 
 ### External resources
 
-- VoyageAI [Multimodal Embed API documentation](https://docs.voyageai.com/docs/multimodal-embeddings)
+- Voyage AI [Multimodal Embed API documentation](https://docs.voyageai.com/docs/multimodal-embeddings)
 
 ## Questions and feedback
 
