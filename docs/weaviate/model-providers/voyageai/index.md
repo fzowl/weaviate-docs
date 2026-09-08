@@ -1,5 +1,5 @@
 ---
-title: Voyage AI + Weaviate
+title: Voyage AI by MongoDB + Weaviate
 sidebar_position: 10
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai']
@@ -7,7 +7,7 @@ image: og/docs/integrations/provider_integrations_voyageai.jpg
 
 <!-- Note: for images, use https://docs.google.com/presentation/d/15opIcJuaIjEEcs_1Zm8B6pccox2p7_MHSjCnRv4dPfU/edit?usp=sharing -->
 
-Voyage AI offers a wide range of models for natural language processing. Weaviate seamlessly integrates with Voyage AI's APIs, allowing users to leverage Voyage AI's models directly from the Weaviate Database.
+Voyage AI by MongoDB (formerly Voyage AI) offers a wide range of models for natural language processing. Weaviate seamlessly integrates with Voyage AI's APIs, allowing users to leverage Voyage AI's models directly from the Weaviate Database.
 
 These integrations empower developers to build sophisticated AI-driven applications with ease.
 

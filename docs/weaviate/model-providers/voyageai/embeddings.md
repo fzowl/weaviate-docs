@@ -17,7 +17,7 @@ import PyCode from '!!raw-loader!../_includes/provider.vectorizer.py';
 import TSCode from '!!raw-loader!../_includes/provider.vectorizer.ts';
 import GoCode from '!!raw-loader!/_includes/code/howto/go/docs/model-providers/2-usage-text/main.go';
 
-# Voyage AI Embeddings with Weaviate
+# Voyage AI by MongoDB Embeddings with Weaviate
 
 Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
 
@@ -346,11 +346,14 @@ The query below returns the `n` best scoring objects from the database, set by `
 - voyage-4-large
 - voyage-3.5
 - voyage-3.5-lite
-- voyage-context-3 (contextual embeddings)
+- voyage-context-4 (contextual embeddings)
+- voyage-context-3 (contextual embeddings, legacy)
 - voyage-3-large
 - voyage-3 (default)
 - voyage-3-lite
 - voyage-large-2 (default for &lt;= `v1.24.24`, `v1.25.17`, `v1.26.4`)
+- voyage-code-4
+- voyage-code-3
 - voyage-code-2
 - voyage-2
 - voyage-law-2
@@ -359,7 +362,7 @@ The query below returns the `n` best scoring objects from the database, set by `
 - voyage-multilingual-2
 
 :::note Contextual embeddings
-The `voyage-context-3` model uses Voyage AI's [contextual embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure this model, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. This model is optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
+The `voyage-context-4` and `voyage-context-3` models use Voyage AI's [contextualized chunk embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure one of these models, Weaviate routes requests to the `/contextualizedembeddings` endpoint (the `contextualized_embed` API). Inputs are sent as a list of strings (`list[str]`) with automatic chunking enabled (`enable_auto_chunking=true`) and a `chunk_size` of `32000` tokens — the maximum per-chunk context window for the contextual models. These models are optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
 :::
 
 <details>
@@ -367,6 +370,7 @@ The `voyage-context-3` model uses Voyage AI's [contextual embeddings API](https:
     Model support history
   </summary>
 
+- Added `voyage-context-4`, `voyage-code-4`, `voyage-code-3`
 - `v1.36`:
     - Added `voyage-4`, `voyage-4-lite`, `voyage-4-large`
 - Added `voyage-3.5`, `voyage-3.5-lite`, `voyage-context-3`
