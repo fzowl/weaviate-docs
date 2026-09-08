@@ -345,7 +345,9 @@ The query below returns the `n` best scoring objects from the database, set by `
 
 ### Available models
 
-The following list reflects the models currently available from [Voyage AI by MongoDB](https://docs.voyageai.com/docs/embeddings). The default model is used if no model is specified.
+Weaviate's `text2vec-voyageai` module forwards the configured `model` name directly to the [Voyage AI by MongoDB embeddings API](https://docs.voyageai.com/docs/embeddings); it does not enforce a fixed allow-list, so any current Voyage AI text embedding model can be selected. (An unrecognized model name is still accepted by the module and falls back to Weaviate's default token-batch limit.) The default model is used if no model is specified.
+
+The models Voyage AI currently offers are grouped below.
 
 Current (recommended) general-purpose and domain models:
 
@@ -377,7 +379,7 @@ Legacy models (still accessible, but superseded by the models above):
 - voyage-2
 
 :::note Contextual embeddings
-The `voyage-context-4` and `voyage-context-3` models use Voyage AI's [contextualized chunk embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure one of these models, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. These models are optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
+The `voyage-context-4` and `voyage-context-3` models use Voyage AI's [contextualized chunk embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). Weaviate detects contextual models by name (any model whose name contains `context`) and automatically routes requests to the `/contextualizedembeddings` endpoint. This requires a Weaviate version that includes contextual-embeddings routing — available since the release that added `voyage-context-3` support (see the model support history below). These models are optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
 
 The API's `contextualized_embed` method accepts an `inputs` parameter of type `Union[List[List[str]], List[str]]` — that is, both input formats are supported: a list of documents where each document is a list of chunk strings (`List[List[str]]`), or a flat list of chunk strings (`List[str]`).
 :::
@@ -387,10 +389,11 @@ The API's `contextualized_embed` method accepts an `inputs` parameter of type `U
     Model support history
   </summary>
 
-- Added `voyage-4-nano`, `voyage-code-4`, `voyage-code-3`, `voyage-context-4`
+Because the module forwards model names to the Voyage AI API, newer Voyage AI models (for example `voyage-4-nano`, `voyage-code-4`, `voyage-code-3`, and `voyage-context-4`) generally work without upgrading Weaviate. The entries below record changes to defaults, per-model token limits, and API routing:
+
 - `v1.36`:
     - Added `voyage-4`, `voyage-4-lite`, `voyage-4-large`
-- Added `voyage-3.5`, `voyage-3.5-lite`, `voyage-context-3`
+- Added `voyage-3.5`, `voyage-3.5-lite`, `voyage-context-3` (introduced contextual-embeddings routing)
 - `v1.24.25`, `v1.25.18`, `v1.26.5`:
     - Added `voyage-3`, `voyage-3-lite`
     - Default model changed to `voyage-3` from `voyage-large-2`
