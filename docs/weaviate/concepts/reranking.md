@@ -64,7 +64,7 @@ You can specify which `property` of the `JeopardyQuestion` class you want to pas
 - [How-to search: Rerank](../search/rerank.md)
 - [Cohere reranker integration](../model-providers/cohere/reranker.md)
 - [Transformers reranker integration](../model-providers/transformers/reranker.md)
-- [VoyageAI reranker integration](../model-providers/voyageai/reranker.md)
+- [Voyage AI by MongoDB reranker integration](../model-providers/voyageai/reranker.md)
 :::
 
 ## Questions and feedback

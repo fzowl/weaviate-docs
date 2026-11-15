@@ -398,7 +398,7 @@ const sidebars = {
             },
             {
               type: "category",
-              label: "VoyageAI",
+              label: "Voyage AI by MongoDB",
               className: "sidebar-item",
               link: {
                 type: "doc",
