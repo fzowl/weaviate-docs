@@ -1,6 +1,6 @@
 ---
 title: Text Embeddings
-description: "Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate."
+description: "Weaviate's integration with Voyage AI by MongoDB's APIs allows you to access their models' capabilities directly from Weaviate."
 sidebar_position: 20
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai', 'embeddings']
@@ -17,11 +17,11 @@ import PyCode from '!!raw-loader!../_includes/provider.vectorizer.py';
 import TSCode from '!!raw-loader!../_includes/provider.vectorizer.ts';
 import GoV5Code from '!!raw-loader!/_includes/code/howto/go/docs/model-providers/2-usage-text/main.go';
 
-# Voyage AI Embeddings with Weaviate
+# Voyage AI by MongoDB Embeddings with Weaviate
 
-Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
+Weaviate's integration with Voyage AI by MongoDB's APIs allows you to access their models' capabilities directly from Weaviate.
 
-[Configure a Weaviate vector index](#configure-the-vectorizer) to use an Voyage AI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your Voyage AI API key. This feature is called the *vectorizer*.
+[Configure a Weaviate vector index](#configure-the-vectorizer) to use a Voyage AI embedding model, and Weaviate will generate embeddings for various operations using the specified model and your Voyage AI API key. This feature is called the *vectorizer*.
 
 At [import time](#data-import), Weaviate generates text object embeddings and saves them into the index. For [vector](#vector-near-text-search) and [hybrid](#hybrid-search) search operations, Weaviate converts text queries into embeddings.
 
@@ -50,7 +50,7 @@ This integration is enabled by default on Weaviate Cloud (WCD) instances.
 
 ### API credentials
 
-You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI](https://www.voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI by MongoDB](https://www.voyageai.com/) to sign up and obtain an API key.
 
 Provide the API key to Weaviate using one of the following methods:
 
@@ -214,6 +214,10 @@ Any additional headers provided at runtime will override the existing Weaviate c
 
 Provide the headers as shown in the [API credentials examples](#api-credentials) above.
 
+:::note API keys starting with `al-`
+Weaviate uses `https://api.voyageai.com/v1` unless you set a base URL. If your Voyage AI by MongoDB API key starts with `al-`, set the base URL to `https://ai.mongodb.com/v1`, either in the collection configuration (`base_url` / `baseURL`) or with the `X-VoyageAI-Baseurl` header. An explicitly set base URL is always used as given.
+:::
+
 ## Data import
 
 After configuring the vectorizer, [import data](../../manage-objects/import.mdx) into Weaviate. Weaviate generates embeddings for text objects using the specified model.
@@ -344,6 +348,8 @@ The query below returns the `n` best scoring objects from the database, set by `
 - voyage-4
 - voyage-4-lite
 - voyage-4-large
+- voyage-code-4
+- voyage-context-4 (contextual embeddings)
 - voyage-3.5
 - voyage-3.5-lite
 - voyage-context-3 (contextual embeddings)
@@ -351,6 +357,7 @@ The query below returns the `n` best scoring objects from the database, set by `
 - voyage-3 (default)
 - voyage-3-lite
 - voyage-large-2 (default for &lt;= `v1.24.24`, `v1.25.17`, `v1.26.4`)
+- voyage-code-3
 - voyage-code-2
 - voyage-2
 - voyage-law-2
@@ -359,7 +366,11 @@ The query below returns the `n` best scoring objects from the database, set by `
 - voyage-multilingual-2
 
 :::note Contextual embeddings
-The `voyage-context-3` model uses Voyage AI's [contextual embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure this model, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. This model is optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality.
+The `voyage-context-4` and `voyage-context-3` models use Voyage AI's [contextual embeddings API](https://docs.voyageai.com/docs/contextualized-chunk-embeddings). When you configure one of these models, Weaviate automatically routes requests to the `/contextualizedembeddings` endpoint. These models are optimized for retrieval-augmented generation (RAG) use cases where document context improves retrieval quality. `voyage-context-4` is the current model, and `voyage-context-3` is its previous generation.
+:::
+
+:::info Embedding dimensions
+`voyage-4-large`, `voyage-4`, `voyage-4-lite`, `voyage-code-4`, `voyage-context-4`, `voyage-context-3`, `voyage-3-large`, `voyage-3.5`, `voyage-3.5-lite` and `voyage-code-3` return 1024-dimensional vectors by default. They also support 2048, 512 and 256 dimensions through the `dimensions` vectorizer parameter. `voyage-finance-2` and `voyage-law-2` always return 1024 dimensions. For the other models, see the [Voyage AI Embedding API documentation](https://docs.voyageai.com/docs/embeddings).
 :::
 
 <details>

@@ -1,6 +1,6 @@
 ---
 title: Reranker
-description: VoyageAI Reranker Model Provider
+description: Voyage AI by MongoDB Reranker Model Provider
 sidebar_position: 70
 image: og/docs/integrations/provider_integrations_voyageai.jpg
 # tags: ['model providers', 'voyageai', 'reranking']
@@ -15,9 +15,9 @@ import TSConnect from '!!raw-loader!../_includes/provider.connect.ts';
 import PyCode from '!!raw-loader!../_includes/provider.reranker.py';
 import TSCode from '!!raw-loader!../_includes/provider.reranker.ts';
 
-# Voyage AI reranker models with Weaviate
+# Voyage AI by MongoDB reranker models with Weaviate
 
-Weaviate's integration with Voyage AI's APIs allows you to access their models' capabilities directly from Weaviate.
+Weaviate's integration with Voyage AI by MongoDB's APIs allows you to access their models' capabilities directly from Weaviate.
 
 [Configure a Weaviate collection](#configure-the-reranker) to use a Voyage AI reranker model, and Weaviate will use the specified model and your Voyage AI API key to rerank search results.
 
@@ -48,7 +48,7 @@ This integration is enabled by default on Weaviate Cloud (WCD) instances.
 
 ### API credentials
 
-You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI](https://www.voyageai.com/) to sign up and obtain an API key.
+You must provide a valid Voyage AI API key to Weaviate for this integration. Go to [Voyage AI by MongoDB](https://www.voyageai.com/) to sign up and obtain an API key.
 
 Provide the API key to Weaviate using one of the following methods:
 
@@ -115,11 +115,14 @@ The [default model](#available-models) is used if no model is specified.
 You can provide the API key as well as some optional parameters at runtime through additional headers in the request. The following headers are available:
 
 - `X-VoyageAI-Api-Key`: The Voyage AI API key.
-- `X-VoyageAI-Baseurl`: The base URL to use (e.g. a proxy) instead of the default Voyage AI URL.
 
 Any additional headers provided at runtime will override the existing Weaviate configuration.
 
 Provide the headers as shown in the [API credentials examples](#api-credentials) above.
+
+:::note No base URL setting
+The reranker integration always sends requests to `https://api.voyageai.com/v1`. Unlike the embedding integrations, it has no base URL setting, so it cannot be used with API keys that start with `al-`, which are served from `https://ai.mongodb.com/v1`.
+:::
 
 ## Reranking query
 
@@ -157,6 +160,8 @@ Any search in Weaviate can be combined with a reranker to perform reranking oper
 
 ### Available models
 
+- rerank-3
+- rerank-3-lite
 - rerank-2.5
 - rerank-2.5-lite
 - rerank-2
@@ -164,8 +169,8 @@ Any search in Weaviate can be combined with a reranker to perform reranking oper
 - rerank-1
 - rerank-lite-1 (default)
 
-:::caution The module default is a retired model
-`rerank-lite-1` is a first-generation model that Voyage AI has retired. The built-in default of the `reranker-voyageai` module is still `rerank-lite-1`, so a collection created without a `model` points at a retired model. Set `model` on every collection you create.
+:::caution The module default is a first-generation model
+`rerank-lite-1` is a first-generation model that Voyage AI has superseded with newer rerankers; `rerank-3` and `rerank-3-lite` are the current recommended models. The built-in default of the `reranker-voyageai` module is still `rerank-lite-1`, so a collection created without a `model` uses the first-generation model. Set `model` on every collection you create.
 :::
 
 <details>
@@ -187,8 +192,8 @@ Any search in Weaviate can be combined with a reranker to perform reranking oper
 
 ### Other integrations
 
-- [Voyage AI embedding models + Weaviate](./embeddings.md).
-- [Voyage AI multimodal embedding models + Weaviate](./embeddings-multimodal.md).
+- [Voyage AI by MongoDB embedding models + Weaviate](./embeddings.md).
+- [Voyage AI by MongoDB multimodal embedding models + Weaviate](./embeddings-multimodal.md).
 
 ### Code examples
 
